@@ -15,13 +15,12 @@ class Kernel extends HttpKernel
      */
     protected $middleware = [
         // \App\Http\Middleware\TrustHosts::class,
+        \Fruitcake\Cors\HandleCors::class, // ← ضعه في البداية
         \App\Http\Middleware\TrustProxies::class,
-        \Illuminate\Http\Middleware\HandleCors::class,
         \App\Http\Middleware\PreventRequestsDuringMaintenance::class,
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
         \App\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
-
     ];
 
     /**
@@ -40,7 +39,7 @@ class Kernel extends HttpKernel
         ],
 
         'api' => [
-            // \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
+            \Fruitcake\Cors\HandleCors::class, // ← أضفه هنا أيضاً
             \Illuminate\Routing\Middleware\ThrottleRequests::class . ':api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
@@ -66,9 +65,6 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'checkAdmin' => \App\Http\Middleware\CheckAdmin::class,
         'checkProductManager' => \App\Http\Middleware\CheckProductManager::class,
+        'cors' => \Fruitcake\Cors\HandleCors::class, // ← أضف alias
     ];
 }
-protected $middleware = [
-    \Fruitcake\Cors\HandleCors::class,
-    // ...
-];
