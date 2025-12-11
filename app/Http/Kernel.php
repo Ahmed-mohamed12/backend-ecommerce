@@ -68,3 +68,7 @@ class Kernel extends HttpKernel
         'checkProductManager' => \App\Http\Middleware\CheckProductManager::class,
     ];
 }
+protected $middleware = [
+    \Fruitcake\Cors\HandleCors::class,
+    // ...
+];
